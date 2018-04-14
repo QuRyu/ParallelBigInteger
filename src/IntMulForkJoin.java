@@ -1,7 +1,9 @@
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 public class IntMulForkJoin extends IntMul {
 
     @Override
-    public int mul(int i, int j) {
-        return 0;
+    public BigInt mul(BigInt i, BigInt j) {
+        throw new NotImplementedException();
     }
 }

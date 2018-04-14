@@ -1,9 +1,11 @@
+// for simplicity the BigInt only represents integers of size supported by Java
+// note that it could be extended to handle integers of arbitrary size
 public class BigInt {
     private int [] internal;
 
     public BigInt(int i) {
         internal = new int[32];
-        intDivision(i);
+        dec2bin(i);
     }
 
     public int getBit(int i) {
@@ -24,7 +26,7 @@ public class BigInt {
         return internal;
     }
 
-    private void intDivision(int i) {
+    private void dec2bin(int i) {
         boolean neg;
 
         neg = i < 0;
