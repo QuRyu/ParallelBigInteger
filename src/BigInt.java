@@ -11,8 +11,8 @@ public class BigInt {
     }
 
     public BigInt(int [] internal) {
-        if (internal.length != 32)
-            throw new IllegalArgumentException("the length of array must be 32");
+        // if (internal.length != 32)
+        //     throw new IllegalArgumentException("the length of array must be 32");
         this.internal = internal;
     }
 
@@ -47,7 +47,7 @@ public class BigInt {
         boolean neg;
 
         neg = i < 0;
-        for (int j=0; j<31; j++) {
+        for (int j=0; j<this.internal.length; j++) {
             internal[j] = i % 2;
             i = i/2;
         }
@@ -58,9 +58,9 @@ public class BigInt {
     private int bin2dec() {
         int result = 0;
 
-        for (int i=0; i<31; i++)
+        for (int i=0; i<this.internal.length; i++)
             result += internal[i]*(2^i);
-        result += -(internal[31]*(2^31));
+        result += -(internal[internal.length-1]*(2^(internal.length-1)));
 
         return result;
     }

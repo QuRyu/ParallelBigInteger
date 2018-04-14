@@ -12,6 +12,14 @@ public class Driver {
 
     public static void main(String[] args) {
         System.out.println("Number of processors: " + NUM_PROCESSORS);
+        int [] testArr = new int[5];
+        testArr[0] = 0;
+        testArr[1] = 1;
+        testArr[2] = 1;
+        testArr[3] = 1;
+        testArr[4] = 0;
+        BigInt test = new BigInt(testArr);
+        System.out.println(test.toString());
 
     }
 
