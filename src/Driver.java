@@ -21,7 +21,7 @@ public class Driver {
         im.mul(mulL, mulR);
 
         Timer.start();
-        int rel = im.mul(mulL, mulR);
+        BigInt rel = im.mul(mulL, mulR);
         Timer.stop();
 
         System.out.println("---------" + version + "----------");
