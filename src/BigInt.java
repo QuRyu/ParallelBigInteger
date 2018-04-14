@@ -58,8 +58,10 @@ public class BigInt {
     private int bin2dec() {
         int result = 0;
 
-        for (int i=0; i<this.internal.length; i++)
-            result += internal[i]*(2^i);
+        for (int i=0; i<internal.length; i++) {
+            int pow = (int)Math.pow(2, i);
+            result += internal[i] * pow;
+        }
         result += -(internal[internal.length-1]*(2^(internal.length-1)));
 
         return result;
