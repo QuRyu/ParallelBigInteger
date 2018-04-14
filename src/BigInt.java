@@ -38,6 +38,11 @@ public class BigInt {
         return bin2dec();
     }
 
+    @Override
+    public String toString() {
+        return "BigInt " + getInteger();
+    }
+
     private void dec2bin(int i) {
         boolean neg;
 
