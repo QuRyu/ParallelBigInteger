@@ -1,5 +1,7 @@
 // for simplicity the BigInt only represents integers of size supported by Java
 // note that it could be extended to handle integers of arbitrary size
+//
+// index 0 is the least significant bit, and 31 is the most significant bit
 public class BigInt {
     private int [] internal;
 
