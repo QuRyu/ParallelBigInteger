@@ -34,6 +34,10 @@ public class BigInt {
         return internal;
     }
 
+    public int getInteger() {
+        return bin2dec();
+    }
+
     private void dec2bin(int i) {
         boolean neg;
 
@@ -44,6 +48,16 @@ public class BigInt {
         }
 
         internal[31] = neg ? 1 : 0;
+    }
+
+    private int bin2dec() {
+        int result = 0;
+
+        for (int i=0; i<31; i++)
+            result += internal[i]*(2^i);
+        result += -(internal[31]*(2^31));
+
+        return result;
     }
 
 }
