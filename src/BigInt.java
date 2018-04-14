@@ -8,6 +8,12 @@ public class BigInt {
         dec2bin(i);
     }
 
+    public BigInt(int [] internal) {
+        if (internal.length != 32)
+            throw new IllegalArgumentException("the length of array must be 32");
+        this.internal = internal;
+    }
+
     public int getBit(int i) {
         if (i > internal.length)
             throw new ArrayIndexOutOfBoundsException();
