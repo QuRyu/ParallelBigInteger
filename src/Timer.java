@@ -15,6 +15,6 @@ public class Timer
      * @return the milliseconds between the last call of start and stop
      */
     public static long getRuntime() {
-        return (endTime - startTime) / 1000000;
+        return endTime - startTime;
     }
 }
