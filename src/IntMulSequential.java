@@ -19,7 +19,6 @@ public class IntMulSequential extends IntMul {
             	resultBi[a+b] += bi_i[a] * bi_j[b];
               resultBi[a+b+1] += resultBi[a+b]/2;
             	resultBi[a+b] %= 2;
-
         	}
       	}
 
@@ -30,8 +29,8 @@ public class IntMulSequential extends IntMul {
 
     //test
     public static void main(String[] args) {
-    	BigInt mulL = new BigInt(235);
-    	BigInt mulR = new BigInt(23);
+    	BigInt mulL = new BigInt(2435);
+    	BigInt mulR = new BigInt(8240);
       System.out.println("Number1: " + mulL.toString());
     	System.out.println("Number2: " + mulR.toString());
       System.out.println("Expected result: " + mulL.getInteger()*mulR.getInteger());
