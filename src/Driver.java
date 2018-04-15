@@ -21,6 +21,8 @@ public class Driver {
         BigInt test = new BigInt(testArr);
         System.out.println(test.toString());
 
+        test("Parallel Version:", new IntMulThreads());
+
     }
 
     private static void test(String version, IntMul im) {
