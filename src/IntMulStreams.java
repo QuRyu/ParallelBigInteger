@@ -5,7 +5,7 @@ public class IntMulStreams extends IntMul {
 
     @Override
     public BigInt mul(BigInt i, BigInt j) {
-        List<Integer[]> collec = new ArrayList<Integer[]>(32);
+        List<Integer[]> collec = new ArrayList<Integer[]>(i.getInternal().length);
 
         List<Tuple<Integer, Integer>> tuples = new ArrayList<>(i.getInternal().length); // the first element is index,
                                                                                         // the second element to multiply
@@ -16,19 +16,18 @@ public class IntMulStreams extends IntMul {
         tuples.stream().parallel()
                        .forEach(x -> mulList(x, j.getInternal(), collec));
 
-        Integer [] id = new Integer[32];
+        Integer [] id = new Integer[i.getInternal().length];
         for (int k = 0; k < id.length; k++) {
             id[k] = 0;
         }
 
         Integer[] reduced = collec.stream().reduce(id, this::addLists);
 
-        int[] result = new int[32];
-        for (int k = 0; k < 32; k++) {
+        int[] result = new int[i.getInternal().length];
+        for (int k = 0; k < i.getInternal().length; k++) {
             result[k] = reduced[k];
         }
         return new BigInt(result);
-
     }
 
     private void addList(int x, int[] arr, List<Integer[]> collec) {
@@ -47,7 +46,7 @@ public class IntMulStreams extends IntMul {
             i[j] = 0;
         }
 
-        for (int j = 0; j < 32-index; j++) {
+        for (int j = 0; j < arr.length-index; j++) {
             i[j+index] = arr[j] * elem;
         }
 
@@ -66,7 +65,6 @@ public class IntMulStreams extends IntMul {
                     break;
                 case 1:
                     a[i] = carry ? 0 : 1;
-                    carry = !carry;
                     break;
                 case 2:
                     a[i] = carry ? 1 : 0;
@@ -77,17 +75,59 @@ public class IntMulStreams extends IntMul {
         return a;
     }
 
-    //public static void main(String[] args) {
-    //    BigInt l = new BigInt(4);
-    //    BigInt r = new BigInt(15);
-    //    IntMulStreams streams = new IntMulStreams();
-    //    BigInt result = streams.mul(l, r);
+    public static void main(String[] args) {
+        BigInt l = new BigInt(4);
+        BigInt r = new BigInt(15);
+        IntMulStreams streams = new IntMulStreams();
+        BigInt result = streams.mul(l, r);
 
-    //    if (result.getInteger() != 60)
-    //        System.out.println("the algorithm is wrong, expected 60;\n" +
-    //                "but got " + result);
+        if (result.getInteger() != 60)
+            System.out.println("the algorithm is wrong, expected 60;\n" +
+                    "but got " + result);
 
-    //}
+        BigInt l2 = streams.makeBigInt1();
+        BigInt r2 = streams.makeBigInt2();
+        result = streams.mul(l2, r2);
+
+    }
+
+    BigInt makeBigInt1() { // 85899439
+        int[] arr = new int[64];
+        for (int i = 0; i < 64; i++) {
+            arr[i] = 0;
+        }
+        arr[26] = 1;
+        arr[24] = 1;
+        arr[20] = 1;
+        arr[19] = 1;
+        arr[18] = 1;
+        arr[17] = 1;
+        arr[15] = 1;
+        arr[13] = 1;
+        arr[12] = 1;
+        arr[11] = 1;
+        arr[0] = 1;
+        arr[1] = 1;
+        arr[2] = 1;
+        arr[3] = 1;
+        arr[5] = 1;
+        arr[7] = 1;
+
+        return new BigInt(arr);
+    }
+
+    BigInt makeBigInt2() { // 541768
+        int[] arr = new int[64];
+        for (int i = 0; i < 64; i++) {
+            arr[i] = 0;
+        }
+        arr[19] = 1;
+        arr[14] = 1;
+        arr[10] = 1;
+        arr[6] = 1;
+        arr[3] = 1;
+        return new BigInt(arr);
+    }
 
     private class Tuple<T, U> {
         T first;
