@@ -49,7 +49,7 @@ public class IntMulThreads extends IntMul {
         }
 
         BigInt result = new BigInt(list);
-        // System.out.println(result.toString());
+        System.out.println(result.toString());
         return result;
     }
 
@@ -117,7 +117,7 @@ public class IntMulThreads extends IntMul {
       		int[] resultBi = new int[100];
 
       		//compute
-      		for (int a = this.start; a < this.end; a++){
+      		for (int a = this.start; a <= this.end; a++){
 	        	for (int b = 0; b < bi_j.length; b++){
 	            	resultBi[a+b] += bi_i[a] * bi_j[b];
 	              	resultBi[a+b+1] += resultBi[a+b]/2;
@@ -139,7 +139,8 @@ public class IntMulThreads extends IntMul {
     //test
     public static void main(String[] args) {
     	BigInt mulL = new BigInt(2435);
-    	BigInt mulR = new BigInt(8240);
+        BigInt mulR = new BigInt(8240);
+
     	IntMulThreads test = new IntMulThreads();
     	BigInt result = test.mul(mulL, mulR);
     }
