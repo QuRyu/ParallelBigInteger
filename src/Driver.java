@@ -6,25 +6,15 @@ public class Driver {
                 Runtime.getRuntime().availableProcessors();
 
     // numbers for test
-    private final static BigInt mulL = new BigInt(23231);
-    private final static BigInt mulR = new BigInt(51431);
-    private final static BigInt result = new BigInt(1194793561);
+    private final static BigInt mulL = makeBigInt1();
+    private final static BigInt mulR = makeBigInt2();
 
     public static void main(String[] args) {
         System.out.println("Number of processors: " + NUM_PROCESSORS);
-        int [] testArr = new int[5];
-        testArr[0] = 0;
-        testArr[1] = 1;
-        testArr[2] = 1;
-        testArr[3] = 1;
-        testArr[4] = 0;
-        BigInt test = new BigInt(testArr);
-        System.out.println(test.toString());
-
         test("Sequential Version:", new IntMulSequential());
         test("Threads Version:", new IntMulThreads());
-
-
+        test("Fork Join Version", new IntMulForkJoin());
+        test("Streams Version", new IntMulStreams());
     }
 
     private static void test(String version, IntMul im) {
@@ -50,4 +40,41 @@ public class Driver {
         System.out.println();
     }
 
+    static BigInt makeBigInt1() { // 85899439
+        int[] arr = new int[64];
+        for (int i = 0; i < 64; i++) {
+            arr[i] = 0;
+        }
+        arr[26] = 1;
+        arr[24] = 1;
+        arr[20] = 1;
+        arr[19] = 1;
+        arr[18] = 1;
+        arr[17] = 1;
+        arr[15] = 1;
+        arr[13] = 1;
+        arr[12] = 1;
+        arr[11] = 1;
+        arr[0] = 1;
+        arr[1] = 1;
+        arr[2] = 1;
+        arr[3] = 1;
+        arr[5] = 1;
+        arr[7] = 1;
+
+        return new BigInt(arr);
+    }
+
+    static BigInt makeBigInt2() { // 541768
+        int[] arr = new int[64];
+        for (int i = 0; i < 64; i++) {
+            arr[i] = 0;
+        }
+        arr[19] = 1;
+        arr[14] = 1;
+        arr[10] = 1;
+        arr[6] = 1;
+        arr[3] = 1;
+        return new BigInt(arr);
+    }
 }
